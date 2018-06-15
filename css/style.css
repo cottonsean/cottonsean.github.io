@@ -1,166 +1,334 @@
-body, html{
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+}
+
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa {
+  position: relative;
+  display: table-cell;
+  width: 60px;
+  height: 36px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+
+.main-menu:hover, nav.main-menu.expanded {
+  width: 250px;
+  overflow: visible;
+}
+
+.main-menu {
+  background: #212121;
+  border-right: 1px solid #e5e5e5;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  width: 60px;
+  overflow: hidden;
+  -webkit-transition: width .05s linear;
+  transition: width .05s linear;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  z-index: 1000;
+}
+
+.main-menu>ul {
+  margin: 7px 0;
+}
+
+.main-menu li {
+  position: relative;
+  display: block;
+  width: 250px;
+}
+
+.main-menu li>a {
+  position: relative;
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: #999;
+  font-family: arial;
+  font-size: 14px;
+  text-decoration: none;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  -webkit-transition: all .1s linear;
+  transition: all .1s linear;
+
+}
+
+.main-menu .nav-icon {
+  position: relative;
+  display: table-cell;
+  width: 60px;
+  height: 36px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 18px;
+}
+
+.main-menu .nav-text {
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  width: 190px;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.main-menu>ul.logout {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.no-touch .scrollable.hover {
+  overflow-y: hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+  overflow-y: auto;
+  overflow: visible;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+nav {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+nav ul, nav li {
+  outline: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.main-menu li:hover>a, nav.main-menu li.active>a, .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus, .no-touch .dashboard-page nav.dashboard-menu ul li:hover a, .dashboard-page nav.dashboard-menu ul li.active a {
+  color: #fff;
+  background-color: #5fa2db;
+}
+
+.area {
+  float: left;
+  background: #e2e2e2;
+  width: 100%;
+  height: 100%;
+}
+
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+
+
+
+body, html {
   height: 100%;
   margin: 0;
   font-size: 25px;
   font-family: "Lato", sans-serif;
-  font-weight:400;
+  font-weight: 400;
   line-height: 1.8em;
   color: #666;
-  text-align:center;
+  text-align: center;
 
 }
 
-.pimg1,.pimg2, .pimg3, .pimg4{
+.pimg1, .pimg2, .pimg3, .pimg4 {
   position: relative;
   opacity: 0.70;
   background-position: center;
-  background-size:cover;
-  background-repeat:no-repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
 
-/*
+  /*
   fixed = parallax
   scroll = normal
 */
-
   background-attachment: fixed;
 }
 
-.pimg1{
-  background-image:url('../images/meship.jpeg');
-  min-height:100%;
-
-
-}
-.pimg2{
-  background-image:url('../images/bahamasunset.jpeg');
-  min-height:400px;
-}
-.pimg3{
-  background-image:url('../images/desk.jpeg');
-  min-height:400px;
-}
-.pimg4{
-  background-image:url('../images/meatlanta.jpg');
-  min-height:100%;
+.pimg1 {
+  background-image: url('../images/meship.jpeg');
+  min-height: 100%;
 }
 
-.section{
-  text-align: center: ;
-  padding:40px 40px;
+.pimg2 {
+  background-image: url('../images/bahamasunset.jpeg');
+  min-height: 400px;
 }
 
-.section-light{
-  background-color:#f4f4f4;
-  color:#666;
-  height: auto;
+.pimg3 {
+  background-image: url('../images/desk.jpeg');
+  min-height: 400px;
 }
-.section-dark{
-  background-color:#2b2e34;
-  color:#ddd;
+
+.pimg4 {
+  background-image: url('../images/meatlanta.jpg');
+  min-height: 850px;
+}
+
+.section {
+  text-align: center:;
+  padding: 10px 10px;
+}
+
+.section-light {
+  background-color: #b7b39f;
+  color: #666;
   height: auto;
 }
 
-.ptext{
+.section-dark {
+  background-color: #2b2e34;
+  color: #ddd;
+  height: auto;
+}
+
+.ptext {
   position: absolute;
-  top:50%;
-  width:100%;
-  text-align:center;
-  color:#000;
-  font-size:30px;
-  letter-spacing:4px;
-  text-transform:uppercase;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+  font-size: 30px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
 }
 
 .ptext .border {
-  background-color:#111;
-  color:white;
-  padding:20px;
+  background-color: #111;
+  color: white;
+  padding: 20px;
 }
 
-.ptext .border.trans{
-  background-color:transparent;
+.ptext .border.trans {
+  background-color: transparent;
 }
 
 #typed {
   color: blue;
-  font-size:47px;
-  text-align:center;
+  font-size: 47px;
+  text-align: center;
 
 }
-.typed-cursor{
+
+.typed-cursor {
   opacity: 1;
   animation: typedjsBlink 0.7s infinite;
   -webkit-animation: typedjsBlink 0.7s infinite;
   animation: typedjsBlink 0.7s infinite;
 }
-@keyframes typedjsBlink{
-  50% { opacity: 0.0; }
+
+@keyframes typedjsBlink {
+  50% {
+    opacity: 0.0;
+  }
 }
-@-webkit-keyframes typedjsBlink{
-  0% { opacity: 1; }
-  50% { opacity: 0.0; }
-  100% { opacity: 1; }
+
+@-webkit-keyframes typedjsBlink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-.typed-fade-out{
+
+.typed-fade-out {
   opacity: 0;
   transition: opacity .25s;
   -webkit-animation: 0;
   animation: 0;
 }
-#content{
-			display: grid;
-			/*grid-template-columns: 30% 20% 50%;*/
-			/*grid-template-columns: 1fr 2fr 1fr;*/
-			grid-template-columns: repeat(2, 1fr);
-      grid-auto-rows: minmax(200px, auto);
-      grid-row-gap: 10px;
-			max-width: 1500px;
-			margin: 0 auto;
 
-		}
-#content2{
-			display: grid;
-			/*grid-template-columns: 30% 20% 50%;*/
-			/*grid-template-columns: 1fr 2fr 1fr;*/
-			grid-template-columns: repeat(4, 1fr);
-      /* grid-auto-rows: minmax(50px, auto); */
-      grid-column-gap: 0px;
-			max-width: 400px;
-			margin: 0 auto;
+#content {
+  display: grid;
+  /*grid-template-columns: 30% 20% 50%;*/
+  /*grid-template-columns: 1fr 2fr 1fr;*/
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  grid-row-gap: 10px;
+  max-width: 1500px;
+  margin: 0 auto;
 
-		}
+}
 
-    #content3{
-    			display: grid;
-    			/*grid-template-columns: 30% 20% 50%;*/
-    			/*grid-template-columns: 1fr 2fr 1fr;*/
-    			grid-template-columns: repeat(5, 1fr);
-          grid-auto-rows: minmax(250px, auto);
-          grid-column-gap: 1px;
-    			max-width: 1500px;
-    			margin: 0 auto;
+#content2 {
+  display: grid;
+  /*grid-template-columns: 30% 20% 50%;*/
+  /*grid-template-columns: 1fr 2fr 1fr;*/
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-auto-rows: minmax(50px, auto); */
+  grid-column-gap: 0px;
+  max-width: 400px;
+  margin: 0 auto;
 
-    		}
-    #content div{
-			background: #dddddd;
-			padding: 30px;
-		}
-    #content2 div{
-			background: #2b2e34;
-			padding: 10px;
-		}
-    #content3 div{
-			background: #2b2e34;
-			padding: 10px;
-		}
-		#content div:nth-child(even){
-			background: #dddddd;
-			padding: 30px;
-		}
+}
+
+#content3 {
+  display: grid;
+  /*grid-template-columns: 30% 20% 50%;*/
+  /*grid-template-columns: 1fr 2fr 1fr;*/
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: minmax(250px, auto);
+  grid-column-gap: 1px;
+  max-width: 1500px;
+  margin: 0 auto;
+
+}
+
+#content4 {
+  display: grid;
+  /*grid-template-columns: 30% 20% 50%;*/
+  /*grid-template-columns: 1fr 2fr 1fr;*/
+  grid-template-columns: repeat(1, 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  grid-row-gap: 10px;
+  max-width: 1500px;
+  margin: 0 auto;
+
+}
+
+#content div {
+  background: #dddddd;
+  padding: 10px;
+}
+
+#content2 div {
+  background: #2b2e34;
+  padding: 10px;
+}
+
+#content3 div {
+  background: #2b2e34;
+  padding: 10px;
+}
+
+#content div:nth-child(even) {
+  background: #dddddd;
+  padding: 30px;
+}
 
 
 @media (max-width: 568px) {
-  .pimg1, .pimg2, .pimg3, .pimg4{
-    background-attachment:scroll
+  .pimg1, .pimg2, .pimg3, .pimg4 {
+    background-attachment: scroll
   }
 }
