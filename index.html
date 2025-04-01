@@ -22,10 +22,11 @@
     
     <!-- Updated Libraries -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <title>Sean Cotton - Software Developer</title>
+    <title>Sean Cotton - Developer & Problem Solver</title>
     <link rel="stylesheet" href="css/style.css">
   </head>
 
@@ -40,13 +41,13 @@
     <nav class="main-menu" role="navigation" aria-label="Main navigation">
       <ul>
         <li>
-          <a href="#top" aria-label="Home">
+          <a href="#home" aria-label="Home">
             <i class="fas fa-home fa-2x" aria-hidden="true"></i>
             <span class="nav-text">Home</span>
           </a>
         </li>
         <li>
-          <a href="#content" aria-label="Projects">
+          <a href="#projects" aria-label="Projects">
             <i class="fas fa-wrench fa-2x" aria-hidden="true"></i>
             <span class="nav-text">Projects</span>
           </a>
@@ -72,213 +73,95 @@
       </ul>
     </nav>
 
-    <div class="pimg1">
-      <div class="ptext">
-        <span class="border trans">
-      Hello my name is <br>
-      Sean Cotton
-    </span>
-        <br>
-        <div id='typed-strings'>
-          <!-- <h1>Sean Cotton</h1><br> -->
-          <p>I am <strong>a developer</strong> </p>
-          <p>I am <strong>a digital problem solver</strong> </p>
-          <p>I am <strong>committed!</strong> </p>
-          <p>I am <strong>addicted to Barbecue!</strong> </p>
-
-        </div>
-        <span id='typed'></span>
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>Sean Cotton</h1>
+        <div id="typed"></div>
+        <p>I create elegant solutions to complex problems</p>
       </div>
-    </div>
+    </section>
 
-
-    <section class="section section-light">
+    <section id="projects" class="section section-light">
       <h2>Projects</h2>
-      <div id="content">
-
-        <div>
-          <p>
-            <strong>Tic Tac Toe</strong>
-          </p>
-          <a href="https://cottonsean.github.io/tgame/">
-            <img data-src="images/TicTacToe.png" style="width:50%" alt="Tic Tac Toe game interface">
-          </a>
-        </div>
-        <div>
-          <p>
-            This is a Tic Tac Toe game that cannot be beat, only tied! Give it a try.
-          </p>
-        </div>
-        <div>
-          <p>
-            Simple Forecast is a weather forecast app I created to give the user a simple experience without a lot of clutter. It's currently in the Apple Store.
-          </p>
-
-        </div>
-        <div>
-          <p>
-            <strong>Simple Forecast</strong>
-          </p>
-          <a href="https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1296970859&mt=8">
-            <img data-src="images/iTunesArtwork@2x.jpg" style="width:45%" alt="Simple Forecast app icon">
-          </a>
-          <br>
-          <a href="https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1296970859&mt=8">
-            <img data-src="images/Download_on_the_App_Store_Badge_US-UK_135x40.svg" style="width:45%" alt="Download on the App Store">
-          </a>
-        </div>
-      </div>
-    </section>
-    <div class="pimg2">
-      <div class="ptext">
-        <span class="border trans">
-
-  </span>
-      </div>
-    </div>
-
-    <section class="section section-dark">
-      <h2 id="skills">Skills</h2>
-      <div id="content3" class="skills-container">
-        <div class="skill-card">
-          <div class="skill-icon">
-            <img data-src="images/HTML5_Logo_512.png" alt="HTML5 logo">
-          </div>
-          <div class="skill-info">
-            <h3>HTML5</h3>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="95"></div>
-            </div>
-            <p class="skill-description">Advanced HTML5 with semantic markup, forms, and multimedia integration</p>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="images/tic-tac-toe.jpg" alt="Tic Tac Toe Game" class="project-image">
+          <div class="project-content">
+            <h3>Tic Tac Toe</h3>
+            <p>An unbeatable Tic Tac Toe game that demonstrates advanced AI algorithms.</p>
           </div>
         </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">
-            <img data-src="images/csslogo.png" alt="CSS logo">
-          </div>
-          <div class="skill-info">
-            <h3>CSS3</h3>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="90"></div>
-            </div>
-            <p class="skill-description">Modern CSS3 with Flexbox, Grid, animations, and responsive design</p>
-          </div>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">
-            <img data-src="images/jslogo.png" alt="JavaScript logo">
-          </div>
-          <div class="skill-info">
-            <h3>JavaScript</h3>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="85"></div>
-            </div>
-            <p class="skill-description">ES6+, DOM manipulation, async programming, and modern frameworks</p>
-          </div>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">
-            <img data-src="images/ruby.png" alt="Ruby logo">
-          </div>
-          <div class="skill-info">
-            <h3>Ruby</h3>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="80"></div>
-            </div>
-            <p class="skill-description">Ruby programming with Rails framework and object-oriented design</p>
-          </div>
-        </div>
-
-        <div class="skill-card">
-          <div class="skill-icon">
-            <img data-src="images/swift.png" alt="Swift logo">
-          </div>
-          <div class="skill-info">
-            <h3>Swift</h3>
-            <div class="skill-bar">
-              <div class="skill-progress" data-progress="85"></div>
-            </div>
-            <p class="skill-description">iOS development with Swift, UIKit, and modern iOS frameworks</p>
+        <div class="project-card">
+          <img src="images/weather-app.jpg" alt="Simple Forecast App" class="project-image">
+          <div class="project-content">
+            <h3>Simple Forecast</h3>
+            <p>A clean, intuitive weather app available on the Apple Store.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="pimg3">
-      <div class="ptext">
-        <span class="border trans">
-
-  </span>
-      </div>
-    </div>
-
-    <section class="section section-dark">
-      <h2 id="about">About Me</h2>
-      <div id="content4">
-
-
-        <p>
-          I use my love of solving problems using technology to help organizations to move forward. I am an Army veteran with a history of successfully exceeding in the automotive, consumer packaged goods, and military industries. Skilled in SQL, Swift, Javascript,
-          Ruby, and HTML/CSS.
-        </p>
-      </div>
-    </section>
-
-    <div class="pimg4">
-      <div class="ptext">
-        <span class="border">
-    Sean Cotton
-  </span>
-      </div>
-    </div>
-
-    <section class="section section-dark">
-      <h2 id="contact">Contact Me</h2>
-      <div id="content2">
-        <div>
-          <p>
-            <a href="https://twitter.com/sean__cotton" aria-label="Follow Sean Cotton on Twitter">
-              <img data-src="images/Twitter_Logo_Blue.png" style="width:50%" alt="Twitter logo">
-            </a>
-
-          </p>
-
-        </div>
-        <div>
-          <p>
-            <a href="https://github.com/cottonsean" aria-label="View Sean Cotton's GitHub profile">
-              <img data-src="images/Octocat.png" style="width:45%"  alt="GitHub logo">
-            </a>
-
-          </p>
-        </div>
-        <div>
-          <p>
-            <a href="https://www.linkedin.com/in/cottonsean" aria-label="Connect with Sean Cotton on LinkedIn">
-              <img data-src="images/Logo-White-128px-TM.png" style="width:80%" alt="LinkedIn logo">
-            </a>
-
-          </p>
-        </div>
-        <div>
-          <div>
-            <p>
-              <a href="mailto:sean@seancotton.com" aria-label="Email Sean Cotton">
-                <img data-src="images/mail.png" style="width:75%" alt="Email icon">
-              </a>
-
-            </p>
+    <section id="skills" class="section section-dark">
+      <h2>Skills</h2>
+      <div class="skills-container">
+        <div class="skill-card">
+          <h3>HTML5</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="90%"></div>
           </div>
-
+          <p>Advanced HTML5 with semantic markup and accessibility</p>
         </div>
-
+        <div class="skill-card">
+          <h3>CSS3</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="85%"></div>
+          </div>
+          <p>Modern CSS3 with Flexbox, Grid, and animations</p>
+        </div>
+        <div class="skill-card">
+          <h3>JavaScript</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="80%"></div>
+          </div>
+          <p>ES6+, DOM manipulation, and modern frameworks</p>
+        </div>
+        <div class="skill-card">
+          <h3>Ruby</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="75%"></div>
+          </div>
+          <p>Ruby programming with Rails framework</p>
+        </div>
+        <div class="skill-card">
+          <h3>Swift</h3>
+          <div class="skill-bar">
+            <div class="skill-progress" data-progress="85%"></div>
+          </div>
+          <p>iOS development with Swift and UIKit</p>
+        </div>
       </div>
     </section>
 
+    <section id="about" class="section section-light">
+      <h2>About Me</h2>
+      <p>I am an Army veteran with a passion for solving complex problems using technology. My experience spans across automotive, consumer packaged goods, and military industries. I combine my technical skills with a strong work ethic to deliver exceptional results.</p>
+    </section>
 
+    <section id="contact" class="section section-dark">
+      <h2>Contact Me</h2>
+      <form class="contact-form">
+        <div class="form-group">
+          <input type="text" placeholder="Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <textarea placeholder="Message" rows="5" required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
 
     <script>
       // Mobile Menu Toggle
@@ -312,65 +195,36 @@
       });
 
       // Typed.js Animation
-      var typed = new Typed('#typed', {
-        stringsElement: '#typed-strings',
+      const typed = new Typed('#typed', {
+        strings: [
+          'I am a developer',
+          'I am a problem solver',
+          'I am committed',
+          'I am addicted to Barbecue!'
+        ],
         typeSpeed: 50,
         backSpeed: 30,
-        backDelay: 2000,
-        loop: true,
-        loopCount: Infinity,
-        showCursor: true,
-        cursorChar: '|',
-        fadeOut: true,
-        fadeOutClass: 'typed-fade-out',
-        fadeOutDelay: 500,
-        autoInsertCss: true
+        loop: true
       });
 
-      // Lazy loading for images
-      document.addEventListener('DOMContentLoaded', function() {
-        const images = document.querySelectorAll('img[data-src]');
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
-              img.src = img.dataset.src;
-              img.removeAttribute('data-src');
-              observer.unobserve(img);
-            }
-          });
-        });
-
-        images.forEach(img => imageObserver.observe(img));
-      });
-
-      // Animate skill bars when they come into view
-      const skillBars = document.querySelectorAll('.skill-progress');
-      const skillObserver = new IntersectionObserver((entries) => {
+      // Skill Bar Animation
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            const progress = entry.target;
-            const targetWidth = progress.dataset.progress + '%';
-            progress.style.width = targetWidth;
-            skillObserver.unobserve(progress);
+            const progressBar = entry.target;
+            const progress = progressBar.getAttribute('data-progress');
+            progressBar.style.width = progress;
           }
         });
-      }, {
-        threshold: 0.5
-      });
+      }, { threshold: 0.5 });
 
-      skillBars.forEach(bar => skillObserver.observe(bar));
+      document.querySelectorAll('.skill-progress').forEach(bar => {
+        observer.observe(bar);
+      });
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
-
-
-
-
-
-
   </body>
 
 </html>
