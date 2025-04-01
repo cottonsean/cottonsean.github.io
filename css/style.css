@@ -8,7 +8,9 @@
   --transition-speed: 0.3s;
   --skill-bar-bg: rgba(255, 255, 255, 0.1);
   --skill-bar-fill: #3498db;
-  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --dark-text: #ffffff;
+  --light-text: #333333;
 }
 
 * {
@@ -152,12 +154,14 @@ body {
 
 .section-light {
   background-color: var(--light-bg);
-  color: var(--text-color);
+  color: var(--light-text);
+  padding: 2rem;
 }
 
 .section-dark {
   background-color: var(--dark-bg);
-  color: white;
+  color: var(--dark-text);
+  padding: 2rem;
 }
 
 /* Typography */
@@ -170,16 +174,21 @@ h1, h2, h3 {
   top: 50%;
   width: 100%;
   text-align: center;
-  color: #000;
+  color: var(--dark-text);
   font-size: 27px;
   letter-spacing: 8px;
   text-transform: uppercase;
 }
 
 .ptext .border {
-  background-color: #111;
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: var(--dark-text);
   padding: 20px;
+  border-radius: 5px;
+}
+
+.ptext .border.trans {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* Content Sections */
@@ -212,8 +221,10 @@ img:hover {
 
 /* Typed.js Animation */
 #typed {
-  font-size: 24px;
-  margin-top: 20px;
+  color: var(--dark-text);
+  font-size: 47px;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Accessibility Improvements */
@@ -297,9 +308,10 @@ img:hover {
 
 .skill-description {
   font-size: 0.9rem;
-  color: #ccc;
+  color: var(--dark-text);
   margin-top: 1rem;
   line-height: 1.4;
+  opacity: 0.9;
 }
 
 /* Animation for skill bars */
