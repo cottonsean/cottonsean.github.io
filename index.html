@@ -24,166 +24,79 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <title>Sean Cotton - Software Developer</title>
     <link rel="stylesheet" href="css/style.css">
   </head>
 
   <body>
-    <nav class="navbar">
-      <div class="container">
-        <a href="#" class="logo">SC</a>
-        <div class="nav-links">
-          <a href="#home">Home</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <button class="mobile-menu-btn" aria-label="Toggle menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </nav>
+    <header>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-    <section id="home" class="hero">
-      <div class="container">
-        <div class="hero-content">
+    <main>
+      <section id="home" class="hero">
+        <div class="container">
           <h1>Sean Cotton</h1>
-          <div id="typed"></div>
-          <p class="hero-subtitle">Software Developer & Problem Solver</p>
-          <div class="hero-cta">
-            <a href="#projects" class="btn btn-primary">View Projects</a>
-            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-          </div>
+          <p class="tagline">Software Developer</p>
+          <p class="description">Creating elegant solutions to complex problems</p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="projects" class="section">
-      <div class="container">
-        <h2>Featured Projects</h2>
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="project-image">
+      <section id="projects" class="projects">
+        <div class="container">
+          <h2>Projects</h2>
+          <div class="project-grid">
+            <div class="project">
               <img src="images/TicTacToe.png" alt="Tic Tac Toe Game">
-            </div>
-            <div class="project-content">
               <h3>Tic Tac Toe</h3>
               <p>An unbeatable AI-powered Tic Tac Toe game demonstrating advanced algorithms.</p>
-              <a href="https://cottonsean.github.io/tgame/" class="btn btn-small">Try it out</a>
+              <a href="https://cottonsean.github.io/tgame/" class="button">Try it out</a>
             </div>
-          </div>
-          <div class="project-card">
-            <div class="project-image">
+            <div class="project">
               <img src="images/iTunesArtwork@2x.jpg" alt="Simple Forecast App">
-            </div>
-            <div class="project-content">
               <h3>Simple Forecast</h3>
               <p>A clean, intuitive weather app available on the Apple Store.</p>
-              <a href="https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1296970859&mt=8" class="btn btn-small">View on App Store</a>
+              <a href="https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1296970859&mt=8" class="button">View on App Store</a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="skills" class="section section-dark">
-      <div class="container">
-        <h2>Skills & Expertise</h2>
-        <div class="skills-grid">
-          <div class="skill-card">
-            <h3>Frontend Development</h3>
-            <ul>
-              <li>HTML5 & CSS3</li>
-              <li>JavaScript (ES6+)</li>
-              <li>Responsive Design</li>
-              <li>UI/UX Best Practices</li>
-            </ul>
-          </div>
-          <div class="skill-card">
-            <h3>Backend Development</h3>
-            <ul>
-              <li>Ruby on Rails</li>
-              <li>SQL Databases</li>
-              <li>API Development</li>
-              <li>Server Architecture</li>
-            </ul>
-          </div>
-          <div class="skill-card">
-            <h3>Mobile Development</h3>
-            <ul>
-              <li>iOS Development</li>
-              <li>Swift</li>
-              <li>UIKit</li>
-              <li>App Store Publishing</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section">
-      <div class="container">
-        <h2>About Me</h2>
-        <div class="about-content">
-          <div class="about-text">
-            <p>I am an Army veteran with a passion for solving complex problems using technology. My experience spans across automotive, consumer packaged goods, and military industries. I combine my technical skills with a strong work ethic to deliver exceptional results.</p>
-            <div class="about-highlights">
-              <div class="highlight">
-                <span class="number">5+</span>
-                <span class="label">Years Experience</span>
+      <section id="contact" class="contact">
+        <div class="container">
+          <h2>Contact</h2>
+          <div class="contact-content">
+            <div class="contact-info">
+              <p>Email: <a href="mailto:sean@seancotton.com">sean@seancotton.com</a></p>
+              <p>GitHub: <a href="https://github.com/cottonsean" target="_blank">github.com/cottonsean</a></p>
+              <p>LinkedIn: <a href="https://www.linkedin.com/in/cottonsean" target="_blank">linkedin.com/in/cottonsean</a></p>
+            </div>
+            <form class="contact-form">
+              <div class="form-group">
+                <input type="text" placeholder="Name" required>
               </div>
-              <div class="highlight">
-                <span class="number">20+</span>
-                <span class="label">Projects Completed</span>
+              <div class="form-group">
+                <input type="email" placeholder="Email" required>
               </div>
-            </div>
+              <div class="form-group">
+                <textarea placeholder="Message" required></textarea>
+              </div>
+              <button type="submit" class="button">Send Message</button>
+            </form>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <section id="contact" class="section section-dark">
+    <footer>
       <div class="container">
-        <h2>Get in Touch</h2>
-        <div class="contact-content">
-          <div class="contact-info">
-            <div class="contact-item">
-              <i class="fas fa-envelope"></i>
-              <a href="mailto:sean@seancotton.com">sean@seancotton.com</a>
-            </div>
-            <div class="contact-item">
-              <i class="fab fa-github"></i>
-              <a href="https://github.com/cottonsean" target="_blank">github.com/cottonsean</a>
-            </div>
-            <div class="contact-item">
-              <i class="fab fa-linkedin"></i>
-              <a href="https://www.linkedin.com/in/cottonsean" target="_blank">linkedin.com/in/cottonsean</a>
-            </div>
-          </div>
-          <form class="contact-form">
-            <div class="form-group">
-              <input type="text" placeholder="Name" required>
-            </div>
-            <div class="form-group">
-              <input type="email" placeholder="Email" required>
-            </div>
-            <div class="form-group">
-              <textarea placeholder="Message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="container">
-        <p>&copy; 2024 Sean Cotton. All rights reserved.</p>
+        <p>&copy; 2024 Sean Cotton</p>
       </div>
     </footer>
 
