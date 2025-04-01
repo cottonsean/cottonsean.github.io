@@ -240,20 +240,17 @@ img:hover {
 /* Skills Section */
 .skills-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  padding: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
 }
 
 .skill-card {
   background: var(--card-bg);
   border-radius: 10px;
-  padding: 20px;
-  transition: transform var(--transition-speed);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  padding: 1.5rem;
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(5px);
 }
 
 .skill-card:hover {
@@ -261,47 +258,48 @@ img:hover {
 }
 
 .skill-icon {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 15px;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .skill-icon img {
-  width: 100%;
-  height: 100%;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
 }
 
 .skill-info {
-  width: 100%;
+  text-align: center;
 }
 
 .skill-info h3 {
-  margin: 10px 0;
-  color: var(--secondary-color);
+  margin-bottom: 1rem;
 }
 
 .skill-bar {
-  width: 100%;
-  height: 8px;
   background: var(--skill-bar-bg);
-  border-radius: 4px;
-  margin: 10px 0;
+  height: 10px;
+  border-radius: 5px;
+  margin: 1rem 0;
   overflow: hidden;
+  position: relative;
 }
 
 .skill-progress {
-  width: 0;
-  height: 100%;
   background: var(--skill-bar-fill);
-  border-radius: 4px;
-  transition: width 1s ease-in-out;
+  height: 100%;
+  width: 0;
+  transition: width 1s ease-out;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .skill-description {
-  font-size: 0.9em;
-  opacity: 0.8;
-  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 1rem;
+  line-height: 1.4;
 }
 
 /* Animation for skill bars */
