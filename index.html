@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Sean Cotton - Software Developer specializing in web and iOS development">
-    <meta name="keywords" content="Sean Cotton, Software Developer, Web Development, iOS Development, Ruby, JavaScript, Swift">
+    <meta name="description" content="Sean Cotton - Software Engineer specializing in web and iOS development">
+    <meta name="keywords" content="Sean Cotton, Software Engineer, Web Development, iOS Development, Ruby, JavaScript, Swift">
     <meta name="author" content="Sean Cotton">
     
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Sean Cotton - Software Developer">
-    <meta property="og:description" content="Software Developer, Digital Problem Solver, and Army Veteran">
+    <meta property="og:title" content="Sean Cotton - Software Engineer">
+    <meta property="og:description" content="Software Engineer, Digital Problem Solver, and Army Veteran">
     <meta property="og:image" content="images/profile.jpg">
     <meta property="og:url" content="https://seancotton.com">
     
@@ -26,73 +26,103 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <title>Sean Cotton - Software Developer</title>
+    <title>Sean Cotton - Software Engineer</title>
     <link rel="stylesheet" href="css/style.css">
   </head>
 
   <body>
-    <div class="page-wrapper">
-      <!-- Sidebar Navigation -->
-      <nav class="sidebar">
-        <div class="sidebar-content">
-          <div class="profile">
-            <img src="images/profile.jpg" alt="Sean Cotton" class="profile-image">
-            <h1>Sean Cotton</h1>
-            <p class="title">Software Developer</p>
+    <header class="header">
+      <nav class="nav">
+        <div class="nav__logo">SC</div>
+        <ul class="nav__links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero" class="hero">
+        <div class="container">
+          <h1 class="hero__title">Sean Cotton</h1>
+          <p class="hero__subtitle">Software Engineer</p>
+          <div class="hero__description">
+            Building elegant solutions to complex problems through code
           </div>
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-          <div class="social-links">
-            <a href="https://github.com/cottonsean" target="_blank">GitHub</a>
-            <a href="https://www.linkedin.com/in/cottonsean" target="_blank">LinkedIn</a>
-            <a href="mailto:sean@seancotton.com">Email</a>
+          <div class="hero__cta">
+            <a href="#projects" class="btn btn--primary">View Projects</a>
+            <a href="#contact" class="btn btn--secondary">Get in Touch</a>
           </div>
         </div>
-      </nav>
+      </section>
 
-      <!-- Main Content -->
-      <main class="main-content">
-        <section id="about" class="section">
-          <h2>About Me</h2>
-          <p>I am an Army veteran with a passion for solving complex problems using technology. My experience spans across automotive, consumer packaged goods, and military industries. I combine my technical skills with a strong work ethic to deliver exceptional results.</p>
-        </section>
-
-        <section id="projects" class="section">
-          <h2>Projects</h2>
-          <div class="projects-grid">
-            <div class="project-card">
-              <div class="project-image">
-                <img src="images/TicTacToe.png" alt="Tic Tac Toe Game">
+      <section id="about" class="section">
+        <div class="container">
+          <h2 class="section__title">About Me</h2>
+          <div class="about__content">
+            <p>I'm a software engineer with a passion for creating efficient, scalable solutions. My experience spans across web and iOS development, where I combine technical expertise with a strong problem-solving mindset to deliver exceptional results.</p>
+            <div class="about__stats">
+              <div class="stat">
+                <span class="stat__number">5+</span>
+                <span class="stat__label">Years Experience</span>
               </div>
-              <div class="project-content">
-                <h3>Tic Tac Toe</h3>
-                <p>An unbeatable AI-powered Tic Tac Toe game demonstrating advanced algorithms.</p>
-                <a href="https://cottonsean.github.io/tgame/" class="project-link">Try it out →</a>
-              </div>
-            </div>
-            <div class="project-card">
-              <div class="project-image">
-                <img src="images/iTunesArtwork@2x.jpg" alt="Simple Forecast App">
-              </div>
-              <div class="project-content">
-                <h3>Simple Forecast</h3>
-                <p>A clean, intuitive weather app available on the Apple Store.</p>
-                <a href="https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1296970859&mt=8" class="project-link">View on App Store →</a>
+              <div class="stat">
+                <span class="stat__number">20+</span>
+                <span class="stat__label">Projects Completed</span>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="skills" class="section">
-          <h2>Skills</h2>
+      <section id="projects" class="section section--dark">
+        <div class="container">
+          <h2 class="section__title">Featured Projects</h2>
+          <div class="projects-grid">
+            <article class="project-card">
+              <div class="project-card__image">
+                <img src="images/TicTacToe.png" alt="Tic Tac Toe Game">
+              </div>
+              <div class="project-card__content">
+                <h3 class="project-card__title">Tic Tac Toe AI</h3>
+                <p class="project-card__description">An unbeatable AI-powered Tic Tac Toe game demonstrating advanced algorithms and game theory implementation.</p>
+                <div class="project-card__tech">
+                  <span>JavaScript</span>
+                  <span>AI</span>
+                  <span>Algorithms</span>
+                </div>
+                <a href="https://cottonsean.github.io/tgame/" class="project-card__link">View Project →</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-card__image">
+                <img src="images/iTunesArtwork@2x.jpg" alt="Simple Forecast App">
+              </div>
+              <div class="project-card__content">
+                <h3 class="project-card__title">Simple Forecast</h3>
+                <p class="project-card__description">A clean, intuitive weather app available on the Apple Store, featuring real-time weather data and location services.</p>
+                <div class="project-card__tech">
+                  <span>Swift</span>
+                  <span>iOS</span>
+                  <span>UIKit</span>
+                </div>
+                <a href="https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1296970859&mt=8" class="project-card__link">View on App Store →</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <div class="container">
+          <h2 class="section__title">Technical Skills</h2>
           <div class="skills-grid">
             <div class="skill-category">
-              <h3>Frontend</h3>
-              <ul>
+              <h3 class="skill-category__title">Frontend Development</h3>
+              <ul class="skill-list">
                 <li>HTML5 & CSS3</li>
                 <li>JavaScript (ES6+)</li>
                 <li>Responsive Design</li>
@@ -100,8 +130,8 @@
               </ul>
             </div>
             <div class="skill-category">
-              <h3>Backend</h3>
-              <ul>
+              <h3 class="skill-category__title">Backend Development</h3>
+              <ul class="skill-list">
                 <li>Ruby on Rails</li>
                 <li>SQL Databases</li>
                 <li>API Development</li>
@@ -109,8 +139,8 @@
               </ul>
             </div>
             <div class="skill-category">
-              <h3>Mobile</h3>
-              <ul>
+              <h3 class="skill-category__title">Mobile Development</h3>
+              <ul class="skill-list">
                 <li>iOS Development</li>
                 <li>Swift</li>
                 <li>UIKit</li>
@@ -118,53 +148,58 @@
               </ul>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="contact" class="section">
-          <h2>Contact</h2>
-          <form class="contact-form">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required>
+      <section id="contact" class="section section--dark">
+        <div class="container">
+          <h2 class="section__title">Get in Touch</h2>
+          <div class="contact-grid">
+            <div class="contact-info">
+              <p>I'm always interested in hearing about new projects and opportunities.</p>
+              <div class="contact-links">
+                <a href="https://github.com/cottonsean" class="contact-link">
+                  <span class="contact-link__icon">GitHub</span>
+                  <span class="contact-link__text">github.com/cottonsean</span>
+                </a>
+                <a href="https://www.linkedin.com/in/cottonsean" class="contact-link">
+                  <span class="contact-link__icon">LinkedIn</span>
+                  <span class="contact-link__text">linkedin.com/in/cottonsean</span>
+                </a>
+                <a href="mailto:sean@seancotton.com" class="contact-link">
+                  <span class="contact-link__icon">Email</span>
+                  <span class="contact-link__text">sean@seancotton.com</span>
+                </a>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="submit-button">Send Message</button>
-          </form>
-        </section>
-      </main>
-    </div>
+            <form class="contact-form">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 Sean Cotton. All rights reserved.</p>
+      </div>
+    </footer>
 
     <script>
-      // Typed.js Animation
-      const typed = new Typed('#typed', {
-        strings: [
-          'I am a developer',
-          'I am a problem solver',
-          'I am committed',
-          'I am addicted to Barbecue!'
-        ],
-        typeSpeed: 50,
-        backSpeed: 30,
-        loop: true
-      });
-
-      // Mobile Menu Toggle
-      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-      const navLinks = document.querySelector('.nav-links');
-      
-      mobileMenuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        mobileMenuBtn.classList.toggle('active');
-      });
-
-      // Smooth Scrolling
+      // Smooth scrolling
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
