@@ -350,19 +350,30 @@ h1, h2, h3, .nav-brand {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.6rem;
+  max-width: 340px;
+}
+
+.early-photo-wrap {
+  position: relative;
 }
 
 .early-photo {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: 160px;
   object-fit: cover;
+  object-position: top center;
   border-radius: 8px;
   border: 1px solid var(--border);
   display: block;
 }
 
-.early-photo:first-child {
-  aspect-ratio: 1 / 1;
+.early-photo-label {
+  display: block;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  font-style: italic;
 }
 
 .early-text {
@@ -769,10 +780,11 @@ h1, h2, h3, .nav-brand {
 
   .early-photo-grid {
     grid-template-columns: repeat(4, 1fr);
+    max-width: 100%;
   }
 
   .early-photo {
-    aspect-ratio: 1 / 1;
+    height: 120px;
   }
 
   .about-photo-wrap {
