@@ -348,9 +348,9 @@ h1, h2, h3, .nav-brand {
 
 .early-photo-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 0.6rem;
-  max-width: 340px;
+  max-width: 480px;
 }
 
 .early-photo-wrap {
@@ -779,7 +779,7 @@ h1, h2, h3, .nav-brand {
   }
 
   .early-photo-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     max-width: 100%;
   }
 
