@@ -456,10 +456,8 @@ h1, h2, h3, .nav-brand {
 .life-grid {
   max-width: 1000px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 220px;
-  gap: 0.75rem;
+  columns: 3;
+  column-gap: 0.75rem;
 }
 
 .life-card {
@@ -467,22 +465,23 @@ h1, h2, h3, .nav-brand {
   overflow: hidden;
   border-radius: 10px;
   border: 1px solid var(--border);
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
 }
 
 .life-tall {
-  grid-row: span 2;
+  /* natural height — no forced sizing needed in columns layout */
 }
 
 .life-card img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
   transition: transform 0.4s ease;
 }
 
 .life-card:hover img {
-  transform: scale(1.06);
+  transform: scale(1.04);
 }
 
 .life-caption {
@@ -623,8 +622,7 @@ h1, h2, h3, .nav-brand {
   }
 
   .life-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 180px;
+    columns: 2;
   }
 
   .contact-links {
