@@ -338,6 +338,16 @@
       </div>
     </section>
 
+    <!-- LIGHTBOX -->
+    <div class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+      <button class="lightbox-close" aria-label="Close">&times;</button>
+      <button class="lightbox-nav lightbox-prev" aria-label="Previous photo">&#8249;</button>
+      <button class="lightbox-nav lightbox-next" aria-label="Next photo">&#8250;</button>
+      <span class="lightbox-counter"></span>
+      <img class="lightbox-img" src="" alt="">
+      <p class="lightbox-caption"></p>
+    </div>
+
     <!-- CONTACT -->
     <section class="section" id="contact">
       <h2>Say Hello</h2>
@@ -384,6 +394,48 @@
             document.querySelector('.nav-links').classList.remove('active');
           }
         });
+      });
+
+      // Lightbox
+      const lightbox = document.querySelector('.lightbox');
+      const lightboxImg = document.querySelector('.lightbox-img');
+      const lightboxCaption = document.querySelector('.lightbox-caption');
+      const lightboxCounter = document.querySelector('.lightbox-counter');
+      const cards = Array.from(document.querySelectorAll('.life-card'));
+      let current = 0;
+
+      function openLightbox(index) {
+        current = index;
+        const img = cards[index].querySelector('img');
+        const cap = cards[index].querySelector('.life-caption');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCaption.textContent = cap ? cap.textContent.trim() : '';
+        lightboxCounter.textContent = `${index + 1} / ${cards.length}`;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function navigate(dir) {
+        current = (current + dir + cards.length) % cards.length;
+        openLightbox(current);
+      }
+
+      cards.forEach((card, i) => card.addEventListener('click', () => openLightbox(i)));
+      document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+      document.querySelector('.lightbox-prev').addEventListener('click', e => { e.stopPropagation(); navigate(-1); });
+      document.querySelector('.lightbox-next').addEventListener('click', e => { e.stopPropagation(); navigate(1); });
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
       });
 
       new Typed('#typed', {
