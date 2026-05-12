@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A small NASA APOD viewer — built by Sean Cotton to learn the api.data.gov endpoints.">
+    <meta name="author" content="Sean Cotton">
+    <title>APOD Viewer — Sean Cotton</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --bg:            #0a0d14;
+        --bg-alt:        #101520;
+        --card:          #151c2c;
+        --accent:        #38bdf8;
+        --accent-dim:    rgba(56, 189, 248, 0.10);
+        --accent-border: rgba(56, 189, 248, 0.22);
+        --text:          #e2e8f0;
+        --text-muted:    #7d8fa8;
+        --border:        rgba(255, 255, 255, 0.07);
+        --speed:         0.25s;
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .topbar a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color var(--speed);
+      }
+      .topbar a:hover { color: var(--accent); }
+
+      .brand { color: var(--text); font-weight: 700; }
+
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .intro h1 {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        margin-bottom: 0.5rem;
+      }
+      .intro p {
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 2rem;
+      }
+      .controls label { color: var(--text-muted); font-size: 0.9rem; }
+      .controls input[type="date"] {
+        background: var(--bg-alt);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.5rem 0.75rem;
+        font-family: inherit;
+        font-size: 0.95rem;
+        color-scheme: dark;
+      }
+      .controls button {
+        background: var(--accent);
+        color: #0a0d14;
+        border: none;
+        border-radius: 8px;
+        padding: 0.55rem 1.1rem;
+        font-family: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity var(--speed);
+      }
+      .controls button:hover { opacity: 0.88; }
+      .controls button.ghost {
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid var(--border);
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .card img, .card iframe {
+        width: 100%;
+        display: block;
+        background: #000;
+      }
+      .card iframe { aspect-ratio: 16 / 9; border: 0; }
+
+      .card-body { padding: 1.5rem 1.75rem 2rem; }
+      .card-body h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.35rem;
+      }
+      .card-meta {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        margin-bottom: 1.25rem;
+      }
+      .card-body p.explanation { font-size: 0.98rem; }
+
+      .status {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--text-muted);
+      }
+      .status.error {
+        color: #fca5a5;
+        background: rgba(239, 68, 68, 0.06);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        border-radius: 12px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem 1rem 3rem;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
+      footer a { color: var(--accent); text-decoration: none; }
+
+      @media (max-width: 540px) {
+        .topbar { padding: 1rem 1.25rem; }
+        main { padding: 2rem 1rem 3rem; }
+        .controls { padding: 0.85rem 1rem; }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <a href="/" class="brand">Sean Cotton</a>
+      <a href="/#contact">← Back to main</a>
+    </div>
+
+    <main>
+      <div class="intro">
+        <h1>NASA APOD Viewer</h1>
+        <p>A tiny app I built to learn the <code>api.data.gov</code> endpoints. Pick any date back to June 16, 1995.</p>
+      </div>
+
+      <div class="controls">
+        <label for="date">Date</label>
+        <input type="date" id="date" min="1995-06-16">
+        <button id="load">Load</button>
+        <button id="today" class="ghost">Today</button>
+        <button id="random" class="ghost">Random</button>
+      </div>
+
+      <div id="output">
+        <div class="status">Loading today's picture…</div>
+      </div>
+    </main>
+
+    <footer>
+      Data from <a href="https://api.nasa.gov/" target="_blank" rel="noopener">NASA APOD</a> via api.data.gov.
+    </footer>
+
+    <script>
+      // ──────────────────────────────────────────
+      // Paste your api.data.gov key here.
+      // Falls back to DEMO_KEY (30 req/hr/IP) if blank.
+      const API_KEY = '';
+      // ──────────────────────────────────────────
+
+      const key = API_KEY || 'DEMO_KEY';
+      const dateInput = document.getElementById('date');
+      const output = document.getElementById('output');
+
+      const todayISO = () => new Date().toISOString().slice(0, 10);
+
+      function randomDateISO() {
+        const start = new Date('1995-06-16').getTime();
+        const end = Date.now();
+        const t = start + Math.random() * (end - start);
+        return new Date(t).toISOString().slice(0, 10);
+      }
+
+      async function load(date) {
+        output.innerHTML = '<div class="status">Loading…</div>';
+        const url = `https://api.nasa.gov/planetary/apod?api_key=${key}&date=${date}`;
+        try {
+          const res = await fetch(url);
+          if (!res.ok) {
+            const body = await res.json().catch(() => ({}));
+            throw new Error(body.msg || `HTTP ${res.status}`);
+          }
+          const data = await res.json();
+          render(data);
+        } catch (err) {
+          output.innerHTML = `<div class="status error">Couldn't load that date: ${err.message}</div>`;
+        }
+      }
+
+      function render(d) {
+        const media = d.media_type === 'video'
+          ? `<iframe src="${d.url}" allowfullscreen></iframe>`
+          : `<img src="${d.hdurl || d.url}" alt="${d.title}">`;
+        const credit = d.copyright ? ` · © ${d.copyright.trim()}` : ' · Public Domain (NASA)';
+        output.innerHTML = `
+          <article class="card">
+            ${media}
+            <div class="card-body">
+              <h2>${d.title}</h2>
+              <div class="card-meta">${d.date}${credit}</div>
+              <p class="explanation">${d.explanation}</p>
+            </div>
+          </article>
+        `;
+      }
+
+      document.getElementById('load').addEventListener('click', () => load(dateInput.value || todayISO()));
+      document.getElementById('today').addEventListener('click', () => {
+        dateInput.value = todayISO();
+        load(dateInput.value);
+      });
+      document.getElementById('random').addEventListener('click', () => {
+        dateInput.value = randomDateISO();
+        load(dateInput.value);
+      });
+      dateInput.addEventListener('change', () => load(dateInput.value));
+
+      dateInput.value = todayISO();
+      load(dateInput.value);
+    </script>
+
+  </body>
+</html>

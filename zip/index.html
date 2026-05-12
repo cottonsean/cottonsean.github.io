@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A small Census ZIP demographics lookup — built by Sean Cotton to learn the Census ACS API.">
+    <meta name="author" content="Sean Cotton">
+    <title>ZIP Demographics — Sean Cotton</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --bg:            #0a0d14;
+        --bg-alt:        #101520;
+        --card:          #151c2c;
+        --accent:        #38bdf8;
+        --accent-dim:    rgba(56, 189, 248, 0.10);
+        --accent-border: rgba(56, 189, 248, 0.22);
+        --text:          #e2e8f0;
+        --text-muted:    #7d8fa8;
+        --border:        rgba(255, 255, 255, 0.07);
+        --speed:         0.25s;
+      }
+
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 2rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .topbar a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color var(--speed);
+      }
+      .topbar a:hover { color: var(--accent); }
+
+      .brand { color: var(--text); font-weight: 700; }
+
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem 5rem;
+      }
+
+      .intro h1 {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        margin-bottom: 0.5rem;
+      }
+      .intro p {
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 2rem;
+      }
+      .controls label { color: var(--text-muted); font-size: 0.9rem; }
+      .controls input[type="text"] {
+        background: var(--bg-alt);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.5rem 0.75rem;
+        font-family: inherit;
+        font-size: 0.95rem;
+        width: 120px;
+        letter-spacing: 0.05em;
+      }
+      .controls button {
+        background: var(--accent);
+        color: #0a0d14;
+        border: none;
+        border-radius: 8px;
+        padding: 0.55rem 1.1rem;
+        font-family: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity var(--speed);
+      }
+      .controls button:hover { opacity: 0.88; }
+      .examples {
+        margin-left: auto;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .examples button {
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.7rem;
+        font-size: 0.85rem;
+      }
+      .examples button:hover { color: var(--accent); border-color: var(--accent-border); }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.75rem;
+      }
+      .card h2 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+      .card .sub { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+      }
+      .stat {
+        background: var(--bg-alt);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1rem 1.1rem;
+      }
+      .stat .label {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.3rem;
+      }
+      .stat .value {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .stat .value.muted { color: var(--text-muted); font-size: 1.1rem; }
+
+      .status {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--text-muted);
+      }
+      .status.error {
+        color: #fca5a5;
+        background: rgba(239, 68, 68, 0.06);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        border-radius: 12px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem 1rem 3rem;
+        color: var(--text-muted);
+        font-size: 0.85rem;
+      }
+      footer a { color: var(--accent); text-decoration: none; }
+
+      @media (max-width: 540px) {
+        .topbar { padding: 1rem 1.25rem; }
+        main { padding: 2rem 1rem 3rem; }
+        .controls { padding: 0.85rem 1rem; }
+        .examples { margin-left: 0; }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <a href="/" class="brand">Sean Cotton</a>
+      <a href="/#contact">← Back to main</a>
+    </div>
+
+    <main>
+      <div class="intro">
+        <h1>ZIP Demographics</h1>
+        <p>Enter a US ZIP code to pull population, income, and housing stats from the Census ACS 5-Year API.</p>
+      </div>
+
+      <div id="keyPrompt" class="controls" style="flex-direction:column;align-items:stretch;display:none;">
+        <p style="color:var(--text-muted);font-size:0.92rem;margin-bottom:0.6rem;">
+          This demo needs a free <a href="https://api.census.gov/data/key_signup.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">Census API key</a> (~60s to register). It's saved in your browser only — never sent anywhere except census.gov.
+        </p>
+        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+          <input type="text" id="keyInput" placeholder="Paste your Census API key" style="flex:1;min-width:240px;background:var(--bg-alt);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;font-family:inherit;font-size:0.9rem;">
+          <button id="saveKey">Save key</button>
+        </div>
+      </div>
+
+      <div id="mainControls" class="controls" style="display:none;">
+        <label for="zip">ZIP</label>
+        <input type="text" id="zip" inputmode="numeric" maxlength="5" placeholder="90210">
+        <button id="load">Look up</button>
+        <div class="examples">
+          <button data-zip="30314">30314 (Atlanta)</button>
+          <button data-zip="39217">39217 (JSU)</button>
+          <button data-zip="10001">10001 (NYC)</button>
+          <button id="clearKey" title="Remove saved Census API key">Clear key</button>
+        </div>
+      </div>
+
+      <div id="output">
+        <div class="status">Enter a ZIP code above to start.</div>
+      </div>
+    </main>
+
+    <footer>
+      Data from <a href="https://www.census.gov/data/developers/data-sets/acs-5year.html" target="_blank" rel="noopener">Census ACS 5-Year</a>.
+      Requires a free <a href="https://api.census.gov/data/key_signup.html" target="_blank" rel="noopener">Census API key</a> (separate from api.data.gov).
+    </footer>
+
+    <script>
+      // Census API key lives in localStorage — each visitor brings their own.
+      // Register a free key at: https://api.census.gov/data/key_signup.html
+      const KEY_STORAGE = 'census_api_key';
+      const getKey = () => localStorage.getItem(KEY_STORAGE) || '';
+
+      const YEAR = '2023';
+      const VARS = {
+        NAME:          'NAME',
+        population:    'B01003_001E',
+        medianIncome:  'B19013_001E',
+        medianHome:    'B25077_001E',
+        pop25Plus:     'B15003_001E',
+        bachelors:     'B15003_022E',
+        masters:       'B15003_023E',
+        professional:  'B15003_024E',
+        doctorate:     'B15003_025E',
+      };
+
+      const zipInput = document.getElementById('zip');
+      const output = document.getElementById('output');
+
+      // Census uses -666666666 (and a few siblings) for "not applicable / suppressed".
+      const isMissing = (v) => v === null || v === '' || Number(v) <= -222222222;
+
+      const fmtNum = (v) => isMissing(v) ? '—' : Number(v).toLocaleString();
+      const fmtMoney = (v) => isMissing(v) ? '—' : '$' + Number(v).toLocaleString();
+      const fmtPct = (num, denom) => {
+        if (isMissing(num) || isMissing(denom) || Number(denom) === 0) return '—';
+        return (Number(num) / Number(denom) * 100).toFixed(1) + '%';
+      };
+
+      async function lookup(zip) {
+        const key = getKey();
+        if (!key) { showKeyPrompt(); return; }
+        if (!/^\d{5}$/.test(zip)) {
+          output.innerHTML = '<div class="status error">ZIP must be exactly 5 digits.</div>';
+          return;
+        }
+        output.innerHTML = '<div class="status">Looking up ' + zip + '…</div>';
+        const fields = Object.values(VARS).join(',');
+        const url = `https://api.census.gov/data/${YEAR}/acs/acs5?get=${fields}&for=zip%20code%20tabulation%20area:${zip}&key=${key}`;
+        try {
+          const res = await fetch(url);
+          if (res.status === 404) {
+            throw new Error(`No ACS data for ZIP ${zip} (it may not be a residential ZCTA).`);
+          }
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          render(zip, data);
+        } catch (err) {
+          output.innerHTML = `<div class="status error">${err.message}</div>`;
+        }
+      }
+
+      function render(zip, raw) {
+        // Census returns: [headers, row1, ...]. We requested one ZCTA, so row1 is what we want.
+        const headers = raw[0];
+        const row = raw[1];
+        const get = (varName) => row[headers.indexOf(varName)];
+
+        const bachOrHigher =
+          [VARS.bachelors, VARS.masters, VARS.professional, VARS.doctorate]
+            .map(get)
+            .reduce((sum, v) => sum + (isMissing(v) ? 0 : Number(v)), 0);
+
+        output.innerHTML = `
+          <article class="card">
+            <h2>ZIP ${zip}</h2>
+            <div class="sub">${get(VARS.NAME)} · ACS 5-Year ${YEAR}</div>
+            <div class="stats">
+              <div class="stat">
+                <div class="label">Population</div>
+                <div class="value">${fmtNum(get(VARS.population))}</div>
+              </div>
+              <div class="stat">
+                <div class="label">Median HH Income</div>
+                <div class="value">${fmtMoney(get(VARS.medianIncome))}</div>
+              </div>
+              <div class="stat">
+                <div class="label">Median Home Value</div>
+                <div class="value">${fmtMoney(get(VARS.medianHome))}</div>
+              </div>
+              <div class="stat">
+                <div class="label">Bachelor's or Higher</div>
+                <div class="value">${fmtPct(bachOrHigher, get(VARS.pop25Plus))}</div>
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      const keyPrompt = document.getElementById('keyPrompt');
+      const mainControls = document.getElementById('mainControls');
+      const keyInput = document.getElementById('keyInput');
+
+      function showKeyPrompt() {
+        keyPrompt.style.display = 'flex';
+        mainControls.style.display = 'none';
+        output.innerHTML = '<div class="status">Enter your Census API key above to start.</div>';
+        keyInput.focus();
+      }
+
+      function showMain() {
+        keyPrompt.style.display = 'none';
+        mainControls.style.display = 'flex';
+        output.innerHTML = '<div class="status">Enter a ZIP code above (or pick a chip).</div>';
+      }
+
+      document.getElementById('saveKey').addEventListener('click', () => {
+        const v = keyInput.value.trim();
+        if (!v) return;
+        localStorage.setItem(KEY_STORAGE, v);
+        showMain();
+      });
+      keyInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') document.getElementById('saveKey').click();
+      });
+
+      document.getElementById('clearKey').addEventListener('click', () => {
+        localStorage.removeItem(KEY_STORAGE);
+        keyInput.value = '';
+        showKeyPrompt();
+      });
+
+      document.getElementById('load').addEventListener('click', () => lookup(zipInput.value.trim()));
+      zipInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') lookup(zipInput.value.trim()); });
+      document.querySelectorAll('.examples button[data-zip]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          zipInput.value = btn.dataset.zip;
+          lookup(btn.dataset.zip);
+        });
+      });
+
+      if (getKey()) showMain(); else showKeyPrompt();
+    </script>
+
+  </body>
+</html>
