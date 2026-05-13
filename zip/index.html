@@ -121,6 +121,22 @@
       }
       .examples button:hover { color: var(--accent); border-color: var(--accent-border); }
 
+      .key-steps {
+        margin: 0.4rem 0 0.9rem 1.25rem;
+        padding: 0;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+      .key-steps li { margin-bottom: 0.25rem; }
+      .key-steps a { color: var(--accent); text-decoration: none; }
+      .key-steps a:hover { text-decoration: underline; }
+      .key-note {
+        color: var(--text-muted);
+        font-size: 0.82rem;
+        margin-bottom: 0.6rem;
+        font-style: italic;
+      }
+
       .card {
         background: var(--card);
         border: 1px solid var(--border);
@@ -155,6 +171,76 @@
         color: var(--text);
       }
       .stat .value.muted { color: var(--text-muted); font-size: 1.1rem; }
+
+      .compare-wrap {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+        overflow-x: auto;
+      }
+      .compare {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 100%;
+      }
+      .compare th, .compare td {
+        text-align: left;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+        white-space: nowrap;
+      }
+      .compare tr:last-child td { border-bottom: none; }
+      .compare th.stat-label,
+      .compare td.stat-label {
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 500;
+        width: 1%;
+      }
+      .compare th.zip-head {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.05rem;
+        color: var(--text);
+        min-width: 160px;
+      }
+      .compare th.zip-head .zip-meta {
+        display: block;
+        font-family: 'Inter', sans-serif;
+        font-weight: 400;
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: 0.1rem;
+        white-space: normal;
+      }
+      .compare th.zip-head .remove {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        border-radius: 6px;
+        width: 22px;
+        height: 22px;
+        line-height: 1;
+        font-size: 0.95rem;
+        cursor: pointer;
+        margin-left: 0.5rem;
+        padding: 0;
+        vertical-align: middle;
+        transition: color var(--speed), border-color var(--speed);
+      }
+      .compare th.zip-head .remove:hover { color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+      .compare td.value {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 500;
+        color: var(--text);
+      }
+      .compare td.value.muted { color: var(--text-muted); font-size: 0.95rem; }
+      .compare td.loading { color: var(--text-muted); font-style: italic; }
+      .compare td.err { color: #fca5a5; }
 
       .status {
         text-align: center;
@@ -195,12 +281,22 @@
     <main>
       <div class="intro">
         <h1>ZIP Demographics</h1>
-        <p>Enter a US ZIP code to pull population, income, and housing stats from the Census ACS 5-Year API.</p>
+        <p>Look up a US ZIP for population, income, and housing stats from the Census ACS 5-Year API. Add more ZIPs to compare side-by-side.</p>
       </div>
 
       <div id="keyPrompt" class="controls" style="flex-direction:column;align-items:stretch;display:none;">
-        <p style="color:var(--text-muted);font-size:0.92rem;margin-bottom:0.6rem;">
-          This demo needs a free <a href="https://api.census.gov/data/key_signup.html" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">Census API key</a> (~60s to register). It's saved in your browser only — never sent anywhere except census.gov.
+        <p style="color:var(--text);font-size:0.95rem;margin-bottom:0.4rem;font-weight:500;">
+          Need a Census API key? Here's how (takes ~60 seconds):
+        </p>
+        <ol class="key-steps">
+          <li>Visit <a href="https://api.census.gov/data/key_signup.html" target="_blank" rel="noopener">api.census.gov/data/key_signup.html</a></li>
+          <li>Fill in your organization name (anything works — "Personal" is fine) and email</li>
+          <li>Check your email for an activation link from the Census Bureau</li>
+          <li>Click the link — your key is shown on the activation page</li>
+          <li>Copy the key and paste it below</li>
+        </ol>
+        <p class="key-note">
+          Your key is stored only in your browser's localStorage and is sent only to api.census.gov. It's never logged or transmitted to this site.
         </p>
         <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
           <input type="text" id="keyInput" placeholder="Paste your Census API key" style="flex:1;min-width:240px;background:var(--bg-alt);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:0.5rem 0.75rem;font-family:inherit;font-size:0.9rem;">
@@ -211,11 +307,12 @@
       <div id="mainControls" class="controls" style="display:none;">
         <label for="zip">ZIP</label>
         <input type="text" id="zip" inputmode="numeric" maxlength="5" placeholder="90210">
-        <button id="load">Look up</button>
+        <button id="load">Add ZIP</button>
         <div class="examples">
           <button data-zip="30314">30314 (Atlanta)</button>
           <button data-zip="39217">39217 (JSU)</button>
           <button data-zip="10001">10001 (NYC)</button>
+          <button id="clearAll" title="Remove all ZIPs from comparison">Clear all</button>
           <button id="clearKey" title="Remove saved Census API key">Clear key</button>
         </div>
       </div>
@@ -262,64 +359,137 @@
         return (Number(num) / Number(denom) * 100).toFixed(1) + '%';
       };
 
-      async function lookup(zip) {
+      // Build the row definitions once; each row knows how to pull its value from a Census getter.
+      const ROWS = [
+        { label: 'Location',           render: (g) => esc(g(VARS.NAME) || '—') },
+        { label: 'Population',         render: (g) => fmtNum(g(VARS.population)) },
+        { label: 'Median HH Income',   render: (g) => fmtMoney(g(VARS.medianIncome)) },
+        { label: 'Median Home Value',  render: (g) => fmtMoney(g(VARS.medianHome)) },
+        { label: "Bachelor's or Higher", render: (g) => {
+            const bach = [VARS.bachelors, VARS.masters, VARS.professional, VARS.doctorate]
+              .map(g)
+              .reduce((sum, v) => sum + (isMissing(v) ? 0 : Number(v)), 0);
+            return fmtPct(bach, g(VARS.pop25Plus));
+          }
+        },
+      ];
+
+      // entries: insertion-ordered map zip -> { state: 'loading'|'ok'|'err', raw?, error? }
+      const entries = new Map();
+
+      const esc = (s) => String(s).replace(/[&<>"']/g, c => (
+        { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]
+      ));
+
+      async function addZip(zip) {
         const key = getKey();
         if (!key) { showKeyPrompt(); return; }
         if (!/^\d{5}$/.test(zip)) {
-          output.innerHTML = '<div class="status error">ZIP must be exactly 5 digits.</div>';
+          flashError('ZIP must be exactly 5 digits.');
           return;
         }
-        output.innerHTML = '<div class="status">Looking up ' + zip + '…</div>';
+        if (entries.has(zip)) {
+          // Already in the comparison — just clear the input and bail.
+          zipInput.value = '';
+          return;
+        }
+        entries.set(zip, { state: 'loading' });
+        zipInput.value = '';
+        render();
+
         const fields = Object.values(VARS).join(',');
         const url = `https://api.census.gov/data/${YEAR}/acs/acs5?get=${fields}&for=zip%20code%20tabulation%20area:${zip}&key=${key}`;
         try {
           const res = await fetch(url);
           if (res.status === 404) {
-            throw new Error(`No ACS data for ZIP ${zip} (it may not be a residential ZCTA).`);
+            throw new Error(`No ACS data for ZIP ${zip} (may not be a residential ZCTA).`);
           }
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const data = await res.json();
-          render(zip, data);
+          const raw = await res.json();
+          entries.set(zip, { state: 'ok', raw });
         } catch (err) {
-          output.innerHTML = `<div class="status error">${err.message}</div>`;
+          entries.set(zip, { state: 'err', error: err.message });
         }
+        render();
       }
 
-      function render(zip, raw) {
-        // Census returns: [headers, row1, ...]. We requested one ZCTA, so row1 is what we want.
-        const headers = raw[0];
-        const row = raw[1];
-        const get = (varName) => row[headers.indexOf(varName)];
+      function removeZip(zip) {
+        entries.delete(zip);
+        render();
+      }
 
-        const bachOrHigher =
-          [VARS.bachelors, VARS.masters, VARS.professional, VARS.doctorate]
-            .map(get)
-            .reduce((sum, v) => sum + (isMissing(v) ? 0 : Number(v)), 0);
+      function clearAll() {
+        entries.clear();
+        render();
+      }
+
+      let errorTimer = null;
+      function flashError(msg) {
+        // Lightweight error surface that doesn't disturb the comparison table.
+        let bar = document.getElementById('errBar');
+        if (!bar) {
+          bar = document.createElement('div');
+          bar.id = 'errBar';
+          bar.className = 'status error';
+          bar.style.marginBottom = '1rem';
+          output.parentNode.insertBefore(bar, output);
+        }
+        bar.textContent = msg;
+        bar.style.display = 'block';
+        clearTimeout(errorTimer);
+        errorTimer = setTimeout(() => { bar.style.display = 'none'; }, 4000);
+      }
+
+      function render() {
+        if (entries.size === 0) {
+          output.innerHTML = '<div class="status">Add a ZIP code above (or pick a chip) to start comparing.</div>';
+          return;
+        }
+
+        const zips = [...entries.keys()];
+
+        // Header row: ZIP + remove button.
+        const headCells = zips.map(zip => `
+          <th class="zip-head">
+            ZIP ${zip}
+            <button class="remove" data-remove="${zip}" title="Remove ZIP ${zip}" aria-label="Remove ZIP ${zip}">×</button>
+            <span class="zip-meta">ACS 5-Year ${YEAR}</span>
+          </th>
+        `).join('');
+
+        // Per-zip getters, with status placeholders for loading/error columns.
+        const cellsForZip = zips.map(zip => {
+          const e = entries.get(zip);
+          if (e.state === 'loading') return { kind: 'loading' };
+          if (e.state === 'err')     return { kind: 'err', msg: e.error };
+          const headers = e.raw[0];
+          const row = e.raw[1];
+          return { kind: 'ok', get: (v) => row[headers.indexOf(v)] };
+        });
+
+        const bodyRows = ROWS.map(rowDef => {
+          const cells = cellsForZip.map(c => {
+            if (c.kind === 'loading') return `<td class="loading">Loading…</td>`;
+            if (c.kind === 'err')     return `<td class="err">${esc(c.msg)}</td>`;
+            return `<td class="value">${rowDef.render(c.get)}</td>`;
+          }).join('');
+          return `<tr><td class="stat-label">${rowDef.label}</td>${cells}</tr>`;
+        }).join('');
 
         output.innerHTML = `
-          <article class="card">
-            <h2>ZIP ${zip}</h2>
-            <div class="sub">${get(VARS.NAME)} · ACS 5-Year ${YEAR}</div>
-            <div class="stats">
-              <div class="stat">
-                <div class="label">Population</div>
-                <div class="value">${fmtNum(get(VARS.population))}</div>
-              </div>
-              <div class="stat">
-                <div class="label">Median HH Income</div>
-                <div class="value">${fmtMoney(get(VARS.medianIncome))}</div>
-              </div>
-              <div class="stat">
-                <div class="label">Median Home Value</div>
-                <div class="value">${fmtMoney(get(VARS.medianHome))}</div>
-              </div>
-              <div class="stat">
-                <div class="label">Bachelor's or Higher</div>
-                <div class="value">${fmtPct(bachOrHigher, get(VARS.pop25Plus))}</div>
-              </div>
-            </div>
-          </article>
+          <div class="compare-wrap">
+            <table class="compare">
+              <thead>
+                <tr><th class="stat-label"></th>${headCells}</tr>
+              </thead>
+              <tbody>${bodyRows}</tbody>
+            </table>
+          </div>
         `;
+
+        output.querySelectorAll('button[data-remove]').forEach(btn => {
+          btn.addEventListener('click', () => removeZip(btn.dataset.remove));
+        });
       }
 
       const keyPrompt = document.getElementById('keyPrompt');
@@ -336,7 +506,7 @@
       function showMain() {
         keyPrompt.style.display = 'none';
         mainControls.style.display = 'flex';
-        output.innerHTML = '<div class="status">Enter a ZIP code above (or pick a chip).</div>';
+        render();
       }
 
       document.getElementById('saveKey').addEventListener('click', () => {
@@ -355,14 +525,12 @@
         showKeyPrompt();
       });
 
-      document.getElementById('load').addEventListener('click', () => lookup(zipInput.value.trim()));
-      zipInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') lookup(zipInput.value.trim()); });
+      document.getElementById('load').addEventListener('click', () => addZip(zipInput.value.trim()));
+      zipInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') addZip(zipInput.value.trim()); });
       document.querySelectorAll('.examples button[data-zip]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          zipInput.value = btn.dataset.zip;
-          lookup(btn.dataset.zip);
-        });
+        btn.addEventListener('click', () => addZip(btn.dataset.zip));
       });
+      document.getElementById('clearAll').addEventListener('click', clearAll);
 
       if (getKey()) showMain(); else showKeyPrompt();
     </script>
